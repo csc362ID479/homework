@@ -1,0 +1,72 @@
+<!--
+Your names goes here
+-->
+<body>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+
+  <!-- Set up basic webpage structure -->
+  <div id="header" class = "head"></div>
+  <div id="nominal" class = "nom"></div>
+  <div id="ordinal" class = "ord"></div>
+  <div id="interval" class = "int"></div>
+  <div id="ratio" class = "rat"></div>
+
+  <style>
+    .head {
+        color: rgba(187, 125, 67);
+        background-color: rgba(235, 237, 241, .7);
+        text-align: center;
+
+    }
+    .nom , .int{
+        color: rgba(235, 237, 241, .7);
+        background-color: rgba(187, 125, 67);
+
+    }
+    .ord , .rat{
+        color: rgba(187, 125, 67);
+        background-color: rgba(235, 237, 241, .7);
+    }
+
+  </style>
+
+  <script>
+    //your code goes here
+
+    const div1 = d3.select("#header");
+    const div2 = d3.select("#nominal");
+    const div3 = d3.select("#ordinal");
+    const div4 = d3.select("#interval");
+    const div5 = d3.select("#ratio");
+    div1.style('border', 'solid brown 2px');
+    
+    d3.selectAll("div").append("h1");
+    div1.select("h1").text("D3 and Data Types Practice");
+    div2.append("p");
+    div3.append("p");
+    div4.append("p");
+    div5.append("p");
+
+    headNom = d3.select("#nominal").select("h1");
+    headNom.text("Nominal");
+    pNom = d3.select("#nominal").select("p").text("Nominal scales are used for labeling qualitative variables. For example, a variable that uses a nominal scale would be favorite color.");
+
+    headOrd = d3.select("#ordinal").select("h1");
+    headOrd.text("Ordinal");
+    pOrd = d3.select("#ordinal").select("p").text("Ordinal scales are used for labeling orderable variables, when there is not a known concrete difference between values. For example, one may rate their day on a ordinal scale, and pick from either boring, normal, exciting, or life-changing.");
+
+    headInt = d3.select("#interval").select("h1");
+    headInt.text("Interval");
+    pInt = d3.select("#interval").select("p").text("Interval scales are used to measure numeric values that we can know both the order and the exact differences between the values, but for which there is no 'true zero'. For example, credit scores are interval variables, since we can measure the difference between two credit scores, we can order credit scores, but there is no 0 credit score.");
+
+    headRat = d3.select("#ratio").select("h1");
+    headRat.text("Ratio");
+    pRat = d3.select("#ratio").select("p").text("Ratio scales are measure it all. They are used for variables that have a true zero, have an ordering, and have a measurable difference. Having a true zero is important because it allows us to calculate ratios. One example of ratio data would be a person's weight.");
+    
+
+
+
+
+  </script>
+
+</body>

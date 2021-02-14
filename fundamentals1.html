@@ -3,7 +3,6 @@
 array of the parameter’s factors. Then, for each factor, f, a circle is drawn of radius f and is located at cx=i*100.-->
 <html>
 <body>
-  <svg id="chart" width="600" height="300"></svg>
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script>
     const array = [];
@@ -29,13 +28,13 @@ array of the parameter’s factors. Then, for each factor, f, a circle is drawn 
         }
         return array;
       }
-    factors.method(24);
+    factors.method(3000);
+    var svg = d3.select("body").append("svg").attr("width", 600).attr("height", 300);
     for(let radius of array){
-      d3.select("#chart")
-        .append("circle")
+      svg.append("circle")
           .attr("r", radius) 
           .attr("cx", radius*10) 
-          .attr("cy", 50)
+          .attr("cy", 20)
           .style("fill", "yellow")
           .style("stroke", "blue")
     }

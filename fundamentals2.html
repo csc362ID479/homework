@@ -1,27 +1,32 @@
 <!DOCTYPE html>
-<!-- Displays 9 circles with their centers separated by 100px horizontally, and each circle has a unique radius. After 2 seconds, the display rearranges the circles so that they are in size order from smallest to largest.-->
+<!-- Displays 9 circles with their centers separated by 100px horizontally, and
+each circle has a unique radius. After 2 seconds, the display rearranges the
+circles so that they are in size order from smallest to largest.-->
 <html>
 <body>
-  
+
   <script src="https://d3js.org/d3.v5.min.js"></script>
+  <svg id = "chart" width = "1000" height = "300"></svg>
   <script>
 	const array = [92, 56, 14, 73, 22, 38, 93, 45, 55];
-	var svg = d3.select("body").append("svg").attr("width", 1000).attr("height", 300);
-	array.forEach(function(num, i, array){
-		svg.append("circle")
-	  	  .attr("r", num/2)
-	  	  .attr("cx", (100*i)+50) 
-		  .attr("cy", 50)
+	var svg = d3.select("body").select("svg")
+	svg.selectAll("circle") // declares the elements we would like to create
+      .data(array) // sets the data to array
+      .enter() // creates a selection to add elements per data item
+      .append("circle") // appends an element of this type to each item in array
+	  	  .attr("r", d=>d/2) // sets radius as half of the data element
+	  	  .attr("cx", function(d,i) {return (100*i)+50}) //sets the x-coordinate
+		    .attr("cy", 50) //sets the y-coordinate
 		  .style("fill", "white")
 		  .style("stroke", "blue");
-	})
+
 
     setTimeout(function() {
 		svg.selectAll("circle")
-			.data(array.sort())
-			.transition().duration(1500)
-	  		.attr("r", d=>d/2) 
-	}, 2000)
+			.data(array.sort()) //sorting the array
+			.transition().duration(1500) //setting duration of transition to be 1.5s
+	  	  .attr("r", d=>d/2) //adjusting circle radii
+	}, 2000) //setting transition to start after 2s
   </script>
 
 </body>

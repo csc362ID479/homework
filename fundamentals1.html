@@ -1,44 +1,46 @@
 <!DOCTYPE html>
 <!-- Includes a method named factors that accepts an integer as its parameter and returns an
-array of the parameter’s factors. Then, for each factor, f, a circle is drawn of radius f and is located at cx=i*100.-->
+array of the parameter’s factors. Then, for each factor, f,
+a circle is drawn of radius f and is located at cx=i*100.-->
 <html>
 <body>
   <script src="https://d3js.org/d3.v5.min.js"></script>
+  <svg id = "chart" width = "100" height = "300"></svg>
   <script>
-    const array = [];
-    const factors = {}
-      factors.method = function(int) {
-        if (int>0){
-          for(let i=1; i<=int; i++){
-            if (int%(int-i)==0){
-              array.push(int-i)
-            }
+
+     var factors = function(int){
+      array = []
+      if (int>0){ //if the number is >  zero
+        for(let i=0; i<=int; i++){//we loop through values between 1 and number
+          if (int%(int-i)==0){
+            array.push(int-i)
           }
         }
-        if (int<0){
-          int = int*-1;
-          for(let i=int; i>=1; i--){
-            if (int%(int-i)==0){
-              array.push(int-i)
-            }
-          }
-        }
-        if (int==0){
-          array.push(0)
-        }
-        return array;
       }
-    factors.method(3000);
-    var svg = d3.select("body").append("svg").attr("width", 600).attr("height", 300);
-    for(let radius of array){
-      svg.append("circle")
-          .attr("r", radius) 
-          .attr("cx", radius*10) 
-          .attr("cy", 20)
+      if (int<0){ //if the number is < zero,
+        int = int*-1; //set it equal to its absolute value
+        for(let i=0; i<=int; i++){ //loop through to find all factors>0
+          if (int%(int-i)==0){
+            array.push(int-i)
+          }
+        }
+      }
+
+      console.log(array)
+      var svg = d3.select("body").select("svg");
+      svg.selectAll("circle") // declares the elements we would like to create
+          .data(array) // sets the data to array
+          .enter() // creates a selection to add elements per data item
+          .append("circle") // appends an element of this type to each item in array
+            .attr("r", d => d ) // sets radius to be element in array
+            .attr("cy", 10) //sets the y-coordinate
+            .attr("cx", d => d*10) //sets the x-coordinate
           .style("fill", "yellow")
           .style("stroke", "blue")
     }
 
+    factors(-20);
+    factors(10);
 
   </script>
 
